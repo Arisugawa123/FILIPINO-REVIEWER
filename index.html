@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wika at Kultura - Tech Flashcards</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">
+                <span class="tech-bracket">[</span>
+                WIKA AT KULTURA
+                <span class="tech-bracket">]</span>
+            </h1>
+            <p class="subtitle">Filipino Language & Culture Study System</p>
+        </header>
+
+        <nav class="mode-selector">
+            <button class="mode-btn active" data-mode="flashcard">
+                <span class="icon">📋</span>
+                Flashcard Mode
+            </button>
+            <button class="mode-btn" data-mode="multiple-choice">
+                <span class="icon">✓</span>
+                Multiple Choice
+            </button>
+            <button class="mode-btn" data-mode="identification">
+                <span class="icon">🎯</span>
+                Identification
+            </button>
+            <button class="filter-btn" id="lesson-filter-btn">
+                <span class="icon">⚙️</span>
+                Filter Lessons
+            </button>
+        </nav>
+
+        <div class="study-container">
+            <!-- Flashcard Mode -->
+            <div id="flashcard-mode" class="study-mode active">
+                <div class="card-container">
+                    <div class="flashcard" id="flashcard">
+                        <div class="card-front">
+                            <div class="card-header">
+                                <span class="card-type">DEFINITION</span>
+                                <span class="card-number">1 / 50</span>
+                            </div>
+                            <div class="card-content">
+                                <p class="question">Click to start studying...</p>
+                            </div>
+                            <div class="card-footer">
+                                <p class="instruction">Click card to reveal answer</p>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="card-header">
+                                <span class="card-type">ANSWER</span>
+                                <span class="card-number">1 / 50</span>
+                            </div>
+                            <div class="card-content">
+                                <p class="answer">Answer will appear here</p>
+                            </div>
+                            <div class="card-footer">
+                                <p class="instruction">Click card to flip back</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="controls">
+                    <button class="control-btn prev-btn">
+                        <span>←</span> Previous
+                    </button>
+                    <button class="control-btn shuffle-btn">
+                        <span>🔀</span> Shuffle
+                    </button>
+                    <button class="control-btn next-btn">
+                        Next <span>→</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Multiple Choice Mode -->
+            <div id="multiple-choice-mode" class="study-mode">
+                <div class="quiz-container">
+                    <div class="quiz-header">
+                        <span class="quiz-progress">Question 1 of 20</span>
+                        <span class="quiz-score">Score: 0/0</span>
+                    </div>
+                    <div class="question-container">
+                        <h3 class="quiz-question">Select the correct answer...</h3>
+                        <div class="options-container">
+                            <div class="option" data-option="A">
+                                <span class="option-letter">A</span>
+                                <span class="option-text">Option A</span>
+                            </div>
+                            <div class="option" data-option="B">
+                                <span class="option-letter">B</span>
+                                <span class="option-text">Option B</span>
+                            </div>
+                            <div class="option" data-option="C">
+                                <span class="option-letter">C</span>
+                                <span class="option-text">Option C</span>
+                            </div>
+                            <div class="option" data-option="D">
+                                <span class="option-letter">D</span>
+                                <span class="option-text">Option D</span>
+                            </div>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+                    <div class="quiz-controls">
+                        <button class="control-btn quiz-prev">Previous</button>
+                        <button class="control-btn quiz-next">Next Question</button>
+                        <button class="control-btn quiz-restart">Restart Quiz</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Identification Mode -->
+            <div id="identification-mode" class="study-mode">
+                <div class="identification-container">
+                    <div class="identification-header">
+                        <span class="identification-progress">Question 1 of 15</span>
+                        <span class="identification-score">Score: 0/0</span>
+                    </div>
+                    <div class="identification-question-container">
+                        <h3 class="identification-question">Type your answer...</h3>
+                        <div class="input-container">
+                            <input type="text" class="identification-input" placeholder="Enter your answer here...">
+                            <button class="submit-btn">Submit</button>
+                        </div>
+                        <div class="identification-feedback"></div>
+                        <div class="hint-container">
+                            <button class="hint-btn">💡 Show Hint</button>
+                            <p class="hint-text"></p>
+                        </div>
+                    </div>
+                    <div class="identification-controls">
+                        <button class="control-btn identification-prev">Previous</button>
+                        <button class="control-btn identification-next">Next Question</button>
+                        <button class="control-btn identification-restart">Restart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>&copy; 2024 Wika at Kultura Study System | Tech-themed Educational Platform</p>
+        </footer>
+    </div>
+
+    <!-- Lesson Filter Modal -->
+    <div id="lesson-filter-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Select Lessons to Study</h2>
+                <span class="close-btn" id="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="filter-options">
+                    <div class="quick-select">
+                        <button class="quick-btn" id="select-all">Select All</button>
+                        <button class="quick-btn" id="deselect-all">Deselect All</button>
+                    </div>
+                    <div class="lesson-checkboxes">
+                        <div class="lesson-item">
+                            <input type="checkbox" id="lesson-1" value="1" checked>
+                            <label for="lesson-1">
+                                <strong>Aralin 1: Ang Wika</strong>
+                                <span class="lesson-desc">Teorya ng Wika, Depinisyon ng Wika</span>
+                            </label>
+                        </div>
+                        <div class="lesson-item">
+                            <input type="checkbox" id="lesson-2" value="2" checked>
+                            <label for="lesson-2">
+                                <strong>Aralin 2: Ang Wika sa Lipunan</strong>
+                                <span class="lesson-desc">Sosyolingguwistika, Rehistro ng Wika, Etnolinggwistika</span>
+                            </label>
+                        </div>
+                        <div class="lesson-item">
+                            <input type="checkbox" id="lesson-3" value="3" checked>
+                            <label for="lesson-3">
+                                <strong>Aralin 3: Mga Estraktura ng Wika</strong>
+                                <span class="lesson-desc">Diyalekto, Idyolek, Speech Community, Bilinggwalismo</span>
+                            </label>
+                        </div>
+                        <div class="lesson-item">
+                            <input type="checkbox" id="lesson-4" value="4" checked>
+                            <label for="lesson-4">
+                                <strong>Aralin 4: Kulturang Pilipino</strong>
+                                <span class="lesson-desc">Katangian ng Kultura, Manifestasyon ng Kultura, Rizalian sa Dapitan</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="apply-btn" id="apply-filter">Apply Filter</button>
+                <button class="cancel-btn" id="cancel-filter">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
